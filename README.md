@@ -98,3 +98,11 @@ $response = $client->post('https://fcm.googleapis.com/v1/projects/' . $this->fir
             ],
         ]);
 ```
+<h2>Sending to Multiple Device</h2>
+
+>In Http V1 to send notifications to multiple devices. You must use topics.
+<br>
+> You can read <a>here</a> about Firebase FCM Topics.
+<br>
+> FCM topic messaging allows you to send a message to multiple devices that have opted in to a particular topic
+
