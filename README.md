@@ -136,7 +136,9 @@ $cloudMessaging->subscribeToTopic($topic, $tokens);
 
 <h3>Step 2: Send a Notification to a Topic</h3>
 
+
 ```php
+
 require_once "vendor/autoload.php";
 
 
@@ -170,6 +172,7 @@ $messageBody = [
         ]);
 
 ```
+
 
 
 <h1>Sending Notifications Using Laravel (Firebase FCM HTTP V1)</h1>
