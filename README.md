@@ -122,7 +122,9 @@ $response = $client->post('https://fcm.googleapis.com/v1/projects/' . $this->fir
 
 
 <h3>Step 1: Subscribe to a Topic or Add FCM Tokens to a Topic</h3>
+
 ```php
+
 require_once "vendor/autoload.php";
 
 
@@ -133,6 +135,7 @@ $factory = (new Factory)->withServiceAccount($this->credentialsFilePath);
 $cloudMessaging = $factory->createMessaging();
 $cloudMessaging->subscribeToTopic($topic, $tokens);
 ```
+
 
 <h3>Step 2: Send a Notification to a Topic</h3>
 
