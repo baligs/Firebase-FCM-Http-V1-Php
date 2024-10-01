@@ -21,5 +21,8 @@
 <h2>Step 2: Install Firebase SDK <small>(Un-official)</small> </h2>
 
 > Go to <a href="https://github.com/kreait/firebase-php"> kreait firebase-php </a> And Install it.
-
+> Or You can run following command
+```bash
+composer require kreait/firebase-php
+```
 <h2>Step 3: Generate Access Token</h2>
