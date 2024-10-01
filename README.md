@@ -1,12 +1,12 @@
 <h1>Firebase FCM HTTP V1 Integration Using PHP</h1>
-<p>This tutorial demonstrates how to send notifications using Firebase Cloud Messaging (FCM) HTTP V1 with PHP.</p>
+<p>This tutorial demonstrates how to send notifications using Firebase Cloud Messaging (FCM) HTTP V1 with PHP. By following this guide, you'll be able to integrate FCM notifications into your PHP applications, leveraging Firebase's powerful messaging service to engage users on mobile or web platforms.</p>
 
 <h3>Prerequisites</h3>
-
+<p>Before starting, make sure you have the following:</p>
 <ul>
 <li>PHP 7.4 or Above</li>
 <li>Firebase project with FCM enabled</li>
-<li>Service account (json file)</li>
+<li>Service account (JSON file)</li>
 </ul>
 
 <h2>Step 1: Firebase Project Setup</h2>
@@ -18,31 +18,31 @@
 
 </ol>
 
-<h2>Step 2: Install Firebase SDK <small>(Un-official)</small> </h2>
+<h2>Step 2: Install Firebase SDK (Unofficial)</h2>
 
-> Go to <a href="https://github.com/kreait/firebase-php"> kreait firebase-php </a> And Install it.
-> Or You can run following command
+> You can install the Firebase SDK for PHP by using <a href="https://github.com/kreait/firebase-php"> kreait/firebase-php</a>. This library provides easy integration with Firebase services.
+> Run the following command to install it:
 
 ```bash
 composer require kreait/firebase-php
 ```
 
 <h2>Step 3: Install PHP HTTP Client </h2>
-You will need a client to make HTTP requests. You can use <a href="https://github.com/guzzle/guzzle">Guzzle</a> :
+You will need a client to handle HTTP requests. A popular choice is <a href="https://github.com/guzzle/guzzle">Guzzle</a>,which you can install with the following command:
 
 ```bash
 composer require guzzlehttp/guzzle
 ```
 
 <h2>Step 4: Install Google API Client </h2>
-You must install <a href="https://github.com/googleapis/google-api-php-client">Google API Php Client</a>. Read
-documentation for installation.
+For generating access tokens, you will need the <a href="https://github.com/googleapis/google-api-php-client">Google API PHP Client</a>. Refer to the documentation for detailed installation instructions.
 
 ```bash
 composer require google/apiclient
 ```
 
 <h2>Step 5: Generate Access Token</h2>
+<p>To send notifications via Firebase, you'll first need to generate an access token. Here's a PHP script to do that:</p>
 
 ```php
 require_once "vendor/autoload.php";
@@ -65,12 +65,14 @@ $this->accessToken = $token['access_token'];
 
 <h2>Sending to Single Device</h2>
 
-You can send notification to single device using following method:
+<p>To send a notification to a single device, use the following method:</p>
 
-<b>Remember</b>
-<p>First we can't use some words in data attribute, like read_at, sender, id, from, to,  gcm, or any value prefixed by google.</p>
-<p>Second request payload size including fcm token  size must not greater be 4096 bytes. FCM token size is 163 Bytes aprox.</p>
-<p>Third we can't use nested array in data array, but you can send data in form json string</p>
+<b>Note:</b>
+<ol>
+<li>Avoid using certain reserved keywords (e.g., read_at, sender, id, from, to, gcm) in the data attribute.</li>
+<li>Ensure the total payload size (including the FCM token) does not exceed 4096 bytes. The FCM token is approximately 163 bytes.</li>
+<li>Nested arrays are not allowed in the data array, but you can send JSON-encoded strings.</li>
+</ol>
 
 ```php
 $userFcmToken = "DEVICE_TOKEN_OF_USER";
@@ -109,26 +111,17 @@ $response = $client->post('https://fcm.googleapis.com/v1/projects/' . $this->fir
 
 <h2>Sending to Multiple Device</h2>
 
-> In Http V1 to send notifications to multiple devices. You must use topics.
+> With HTTP V1, notifications to multiple devices are sent using topics. You can learn more about Firebase FCM topics <a>here</a>.
 <br>
-> You can read <a>here</a> about Firebase FCM Topics.
-<br>
-> FCM topic messaging allows you to send a message to multiple devices that have opted in to a particular topic
-<br>
-> One app instance can be subscribed to no more than 2000 topics. Means a device can be subscribed to maximum 2000 topics.
-<br>
-> <b>Important:</b> The frequency of new subscriptions is rate-limited per project. If you send too many subscription requests in a short period of time, FCM servers will respond with a 429 RESOURCE_EXHAUSTED ("quota exceeded") response. Retry with exponential backoff.
 
-
-For sending multiple notification follow these steps:
-
+<b>Important Notes:</b>
 <ul>
-<li>Step 1: Subscribe to a topic or add FCM tokens to Topic.</li>
-<li>Step 2: Send notification to topic.</li>
+<li>An app instance can subscribe to a maximum of 2000 topics.</li>
+<li>If too many subscription requests are made in a short period, the FCM servers may respond with a 429 RESOURCE_EXHAUSTED error. In such cases, retry using exponential backoff.</li>
 </ul>
 
-<h3>Step 1: Subscribe to a topic or add FCM tokens to Topic</h3>
-Here is the method of topic subscription.
+
+<h3>Step 1: Subscribe to a Topic or Add FCM Tokens to a Topic</h3>
 ```php
 require_once "vendor/autoload.php";
 
@@ -141,7 +134,7 @@ $cloudMessaging = $factory->createMessaging();
 $cloudMessaging->subscribeToTopic($topic, $tokens);
 ```
 
-<h3>Step 2: Send notification to topic.</h3>
+<h3>Step 2: Send a Notification to a Topic</h3>
 
 ```php
 require_once "vendor/autoload.php";
@@ -179,7 +172,9 @@ $messageBody = [
 ```
 
 
-<h1>Sending Notification Using Laravel (Firebase FCM Http V1)</h1>
+<h1>Sending Notifications Using Laravel (Firebase FCM HTTP V1)</h1>
 
-You can use following class to send notification using laravel.
+If you're using Laravel, you can easily integrate Firebase FCM HTTP V1 by using the following class: 
 <a href="https://github.com/baligs/Firebase-FCM-Http-V1-Php/blob/main/LaravelFcmHelper.php">LaravelFcmHelper</a>
+
+<p>This helper class simplifies the process of sending FCM notifications in Laravel applications, making it easy to engage with your users through Firebase's reliable notification system.</p>
